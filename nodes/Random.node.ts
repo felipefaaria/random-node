@@ -10,7 +10,7 @@ export class Random implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Random',
 		name: 'random',
-		icon: 'file:random.svg', // coloque o arquivo random.svg na mesma pasta do node
+		icon: 'file:random.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
@@ -31,7 +31,7 @@ export class Random implements INodeType {
 						name: 'True Random Number Generator',
 						value: 'trueRandomNumberGenerator',
 						description: 'Gera um número inteiro aleatório usando a API do Random.org',
-						action: 'Gera um n mero inteiro aleat rio usando a api do random org',
+						action: 'Gera um numero inteiro aleatorio usando a api do random org',
 					},
 				],
 				default: 'trueRandomNumberGenerator',
@@ -81,7 +81,7 @@ export class Random implements INodeType {
 				const responseData = await this.helpers.httpRequest({
 					method: 'GET',
 					url,
-					json: false, // Random.org retorna texto puro
+					json: false,
 				});
 
 				const randomNumber = parseInt(responseData as string, 10);

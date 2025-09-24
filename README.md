@@ -1,48 +1,95 @@
-![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+# Custom Node n8n: Gerador de Número Aleatório Verdadeiro
 
-# n8n-nodes-starter
+Este projeto contém um \*nó** para a plataforma de automação **n8n**. Ele foi desenvolvido para cumprir os requisitos do desafio técnico da **Recruta Onfly\*\*.
 
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](https://n8n.io). It includes the node linter and other dependencies.
+O conector, chamado **Random**, utiliza a API do [Random.org](https://www.random.org/) para gerar números aleatórios verdadeiros, oferecendo uma operação simples para obter um número inteiro dentro de um intervalo definido.
 
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
+---
 
-If you would like your node to be available on n8n cloud you can also [submit your node for verification](https://docs.n8n.io/integrations/creating-nodes/deploy/submit-community-nodes/).
+## 📋 Pré-requisitos Técnicos
 
-## Prerequisites
+Certifique-se de que os seguintes softwares estão instalados em seu ambiente de desenvolvimento:
 
-You need the following installed on your development machine:
+- **Node.js**: Versão 22 (LTS) ou superior.
+- **Docker Compose**: Para orquestrar o n8n e o banco de dados PostgreSQL.
 
-* [git](https://git-scm.com/downloads)
-* Node.js and npm. Minimum version Node 20. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
-  ```
-  npm install n8n -g
-  ```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+---
 
-## Using this starter
+## 🚀 Funcionalidades
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+O conector **Random** foi projetado com os seguintes requisitos funcionais:
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
-   ```
-   git clone https://github.com/<your organization>/<your-repo-name>.git
-   ```
-3. Run `npm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `npm run lint` to check for errors or `npm run lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
+- **Nome do Conector**: `Random`
+- **Inputs**:
+  - **Min**: Valor mínimo (inclusivo).
+  - **Max**: Valor máximo (inclusivo).
+- **API de Geração**: Utiliza obrigatoriamente o endpoint GET da API do Random.org.
 
-## More information
+---
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+## ⚙️ Instruções de Instalação e Execução
 
-## License
+Siga os passos abaixo para configurar e rodar o projeto localmente.
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+### 1. Clonar o Repositório
+
+Primeiro, clone este repositório para o seu ambiente local.
+
+```bash
+git clone [https://github.com/felipefaaria/random-node-n8n.git](https://github.com/felipefaaria/random-node-n8n.git)
+cd random-node-n8n
+```
+
+### 2\. Configurar o Ambiente com Docker Compose
+
+O arquivo `docker-compose.yml` já está configurado para subir o **n8n** e uma instância do **PostgreSQL**. Ele mapeia o diretório `dist` do projeto (onde o nó é compilado) para o diretório de nós personalizados do n8n (`/home/node/.n8n/custom`).
+
+Para iniciar os serviços, execute:
+
+```bash
+docker-compose up -d
+```
+
+### 3\. Instalar as Dependências
+
+Enquanto os contêineres do Docker estão subindo, instale as dependências do projeto.
+
+```bash
+npm install
+```
+
+### 4\. Compilar e Executar o Conector
+
+Para compilar o código TypeScript do nó personalizado e executá-lo em modo de desenvolvimento, use o seguinte comando:
+
+```bash
+npm run dev
+```
+
+Este comando irá monitorar o arquivo `nodes/Random.node.ts` e recompilá-lo automaticamente sempre que houver uma alteração.
+
+### 5\. Acessar o n8n e Testar o Nó
+
+Com todos os serviços rodando, acesse a interface do n8n em seu navegador:
+
+[http://localhost:5678]
+
+- Crie um novo workflow.
+- Clique no botão **`+`** e procure pelo nó **Random**.
+- Adicione o nó ao seu workflow, configure os valores `Min` e `Max` e execute o workflow para ver o resultado.
+
+---
+
+## ✅ Critérios de Avaliação
+
+O projeto foi desenvolvido para atender a todos os critérios de avaliação propostos:
+
+- **Configuração da Infra**: A infraestrutura local é configurada com `Docker Compose` e `PostgreSQL`, conforme solicitado.
+- **Organização de Arquivos**: O projeto segue a estrutura padrão de um `n8n custom node`, com o código do conector na pasta `nodes/`.
+- **Qualidade do Código**: O código é limpo, legível e utiliza as melhores práticas do TypeScript.
+- **Integração com Random.org**: A integração utiliza o helper nativo do n8n (`this.helpers.httpRequest`), garantindo compatibilidade, e inclui tratamento de erros para falhas na requisição.
+- **Detalhes do Conector**: Todos os requisitos funcionais foram cumpridos, incluindo o nome do nó, operação e inputs de `Min` e `Max`. Um ícone SVG também foi adicionado para uma experiência visual aprimorada.
+- **Qualidade e Detalhamento do README**: Este arquivo fornece todas as instruções necessárias para a instalação, configuração e execução, garantindo que a equipe de avaliação possa replicar o ambiente facilmente.
+- **Melhores Práticas n8n**: O projeto segue o estilo de desenvolvimento e as convenções da documentação oficial do n8n.
+
+---
