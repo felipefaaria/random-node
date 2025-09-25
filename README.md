@@ -1,6 +1,6 @@
 # Custom Node n8n: Gerador de Número Aleatório Verdadeiro
 
-Este projeto contém um \*nó** para a plataforma de automação **n8n**. Ele foi desenvolvido para cumprir os requisitos do desafio técnico da **Recruta Onfly\*\*.
+Este projeto contém um **nó** para a plataforma de automação n8n. Ele foi desenvolvido para cumprir os requisitos do desafio técnico da Recruta Onfly.
 
 O conector, chamado **Random**, utiliza a API do [Random.org](https://www.random.org/) para gerar números aleatórios verdadeiros, oferecendo uma operação simples para obter um número inteiro dentro de um intervalo definido.
 
@@ -21,8 +21,8 @@ O conector **Random** foi projetado com os seguintes requisitos funcionais:
 
 - **Nome do Conector**: `Random`
 - **Inputs**:
-  - **Min**: Valor mínimo (inclusivo).
-  - **Max**: Valor máximo (inclusivo).
+  - **Min**: Valor mínimo.
+  - **Max**: Valor máximo.
 - **API de Geração**: Utiliza obrigatoriamente o endpoint GET da API do Random.org.
 
 ---
@@ -34,11 +34,6 @@ Siga os passos abaixo para configurar e rodar o projeto localmente.
 ### 1. Clonar o Repositório
 
 Primeiro, clone este repositório para o seu ambiente local.
-
-```bash
-git clone [https://github.com/felipefaaria/random-node-n8n.git](https://github.com/felipefaaria/random-node-n8n.git)
-cd random-node-n8n
-```
 
 ### 2\. Configurar o Ambiente com Docker Compose
 
